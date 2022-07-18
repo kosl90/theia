@@ -17,7 +17,7 @@
 import * as React from '@theia/core/shared/react';
 import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
 import { Message } from '@theia/core/shared/@phosphor/messaging';
-import { PluginMetadata } from '../../common/plugin-protocol';
+import { getPluginId, PluginMetadata } from '../../common/plugin-protocol';
 import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
 import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
 import { HostedPluginSupport, PluginProgressLocation } from '../../hosted/browser/hosted-plugin';
@@ -87,7 +87,7 @@ export class PluginWidget extends ReactWidget {
     }
 
     private renderPlugin(plugin: PluginMetadata): JSX.Element {
-        return <div key={plugin.model.name} className={this.createPluginClassName(plugin)}>
+        return <div key={getPluginId(plugin.model)} className={this.createPluginClassName(plugin)}>
             <div className='column flexcontainer pluginInformationContainer'>
                 <div className='row flexcontainer'>
                     <div className={codicon('list-selection')}></div>
